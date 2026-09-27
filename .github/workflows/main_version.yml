@@ -71,7 +71,7 @@ on:
 
       display_name:
         description: "App Name (Optional)"
-        default: "YouTube"
+        default: "DexTube"
         required: true
         type: string
 
