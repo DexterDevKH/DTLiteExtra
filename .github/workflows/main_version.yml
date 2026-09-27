@@ -1,4 +1,4 @@
-name: Create YouTube Plus App By Version
+name: Create DexTube Plus App By Version
 
 on:
   workflow_dispatch:
@@ -150,14 +150,14 @@ jobs:
             [ -f "$f" ] && tweaks="$tweaks $f"
           done
           # Generate the IPA with the requested naming convention
-          cyan -i youtube.ipa -o YouTubePlus_v${{ github.event.inputs.tweak_version }}_${{ env.YT_VERSION }}.ipa -uwef $tweaks -n "${{ github.event.inputs.display_name }}" -b ${{ github.event.inputs.bundle_id }}
+          cyan -i youtube.ipa -o ${{ github.event.inputs.display_name }}Plus_v${{ github.event.inputs.tweak_version }}_${{ env.YT_VERSION }}.ipa -uwef $tweaks -n "${{ github.event.inputs.display_name }}" -b ${{ github.event.inputs.bundle_id }}
 
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ytp-v${{ github.event.inputs.tweak_version }}-${{ env.YT_VERSION }}
-          name: YouTubePlus v${{ github.event.inputs.tweak_version }} ${{ env.YT_VERSION }}
-          files: YouTubePlus_v${{ github.event.inputs.tweak_version }}_${{ env.YT_VERSION }}.ipa
+          name: ${{ github.event.inputs.display_name }}Plus v${{ github.event.inputs.tweak_version }} ${{ env.YT_VERSION }}
+          files: ${{ github.event.inputs.display_name }}Plus_v${{ github.event.inputs.tweak_version }}_${{ env.YT_VERSION }}.ipa
 
       - name: Output Release URL
         run: |

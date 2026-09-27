@@ -101,13 +101,13 @@ jobs:
           git checkout
           mv *.sdk $THEOS/sdks
 
-      - name: Download YouTube Plus (by version)
+      - name: Download DexTube Plus (by version)
         if: ${{ inputs.tweak_version != '' }}
         run: |
           deb_url="https://github.com/dayanch96/YTLite/releases/download/v${{ inputs.tweak_version }}/com.dvntm.ytlite_${{ inputs.tweak_version }}_iphoneos-arm.deb"
           wget "$deb_url" --no-verbose -O ytplus.deb
 
-      - name: Download YouTube Plus (by URL)
+      - name: Download DexTube Plus (by URL)
         if: ${{ inputs.tweak_url != '' }}
         run: |
           wget "${{ inputs.tweak_url }}" --no-verbose -O ytplus.deb

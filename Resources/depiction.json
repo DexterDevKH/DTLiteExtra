@@ -9,13 +9,13 @@
                 {
                     "class": "DepictionSubheaderView",
                     "useBottomMargin": false,
-                    "title": "YouTube Plus",
+                    "title": "DexTube Plus",
                     "useBoldText": true
                 },
                 {
                     "useSpacing": true,
                     "class": "DepictionMarkdownView",
-                    "markdown": "A flexible enhancer for YouTube app"
+                    "markdown": "A flexible enhancer for DexTube app"
                 },
                 {
                     "spacing": 8,
@@ -65,7 +65,7 @@
                     "itemCornerRadius": 6
                 },
                 {
-                    "markdown": "### Features:\n- Download videos, audio (including audio track selection), thumbnails, posts, and profile pictures\n- Copy video, comment, and post information\n- Interface customization: Remove feed elements, reorder tabs, enable OLED mode, and as use Shorts-only mode\n- Player settings: Gestures, default quality, preferred audio track\n- Save, Load and Restore settings. Clear cache once or automatically on app startup\n- Built-in SponsorBlock\n- And much, much more\n\n*YouTube Plus preferences can be found in the YouTube settings*",
+                    "markdown": "### Features:\n- Download videos, audio (including audio track selection), thumbnails, posts, and profile pictures\n- Copy video, comment, and post information\n- Interface customization: Remove feed elements, reorder tabs, enable OLED mode, and as use Shorts-only mode\n- Player settings: Gestures, default quality, preferred audio track\n- Save, Load and Restore settings. Clear cache once or automatically on app startup\n- Built-in SponsorBlock\n- And much, much more\n\n*DexTube Plus preferences can be found in the YouTube settings*",
                     "class": "DepictionMarkdownView",
                     "useBottomMargin": false,
                     "title": "markdown-description",
