@@ -107,9 +107,9 @@ Review by [@qbap](https://github.com/qbap) on ONE Jailbreak: https://onejailbrea
 
 ## Supported YouTube Version
 <ul>
-   <li><strong>Latest confirmed:</strong> <em>21.18.4</em></li>
-   <li><strong>Date tested:</strong> <em>May 11, 2026</em></li>
-   <li><strong>DexTube Plus:</strong> <em>5.2.1</em></li>
+   <li><strong>Latest confirmed:</strong> <em>21.38.3</em></li>
+   <li><strong>Date tested:</strong> <em>Sep 27, 2026</em></li>
+   <li><strong>DexTube Plus:</strong> <em>6.0-b1</em></li>
 </ul>
 
 ## Tweak Integration Details
