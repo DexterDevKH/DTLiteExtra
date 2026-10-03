@@ -57,6 +57,12 @@ on:
         required: true
         default: true
 
+      enable_localization:
+        description: "Update localization files from repo"
+        type: boolean
+        required: true
+        default: false
+
       ipa_url:
         description: "URL to the decrypted IPA file"
         default: ""
@@ -104,6 +110,7 @@ jobs:
       enable_ytabc: ${{ inputs.enable_ytabc }}
       enable_demc: ${{ inputs.enable_demc }}
       enable_ytamp: ${{ inputs.enable_ytamp }}
+      enable_localization: ${{ inputs.enable_localization }}
       tweak_url: ${{ inputs.tweak_url }}
 
   package:
@@ -123,7 +130,7 @@ jobs:
       - name: Hide sensitive inputs
         uses: levibostian/action-hide-sensitive-inputs@v1
         with:
-          exclude_inputs: bundle_id,display_name,enable_demc,enable_ryd,enable_ytabc,enable_youpip,enable_yq,enable_ytuhd,enable_ycq,enable_vbyt,enable_ytamp,info_note
+          exclude_inputs: bundle_id,display_name,enable_demc,enable_ryd,enable_ytabc,enable_youpip,enable_yq,enable_ytuhd,enable_ycq,enable_vbyt,enable_ytamp,enable_localization,info_note
 
       - name: Download and validate IPA
         run: |
@@ -134,7 +141,7 @@ jobs:
             exit 1
           fi
 
-      - name: Get YouTube and Tweak Versions 
+      - name: Get YouTube and Tweak Versions And Patch Info.plist
         run: |
           # Extract YouTube Version
           unzip -q youtube.ipa -d ytextracted
@@ -146,6 +153,15 @@ jobs:
           filename=$(basename "$clean_url")
           echo "TWEAK_VERSION=$(echo "$filename" | cut -d'_' -f2)" >> $GITHUB_ENV
 
+          # Patch Info.plist
+          plist="$(find ytextracted/Payload -maxdepth 1 -name '*.app' | head -n 1)/Info.plist"
+          /usr/libexec/PlistBuddy -c "Delete :UIDesignRequiresCompatibility" "$plist" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Delete :NSFaceIDUsageDescription" "$plist" 2>/dev/null || true
+          /usr/libexec/PlistBuddy -c "Add :NSFaceIDUsageDescription string 'Face ID is required to authenticate.'" "$plist"
+          rm youtube.ipa
+          (cd ytextracted && zip -qry ../youtube.ipa .)
+          rm -rf ytextracted
+
       - name: Install cyan
         run: pipx install --force https://github.com/asdfzxcvbn/pyzule-rw/archive/main.zip
 
@@ -155,7 +171,6 @@ jobs:
           for f in *.deb; do
             [ -f "$f" ] && tweaks="$tweaks $f"
           done
-          # Generate the IPA with the requested naming convention
           cyan -i youtube.ipa -o ${{ github.event.inputs.display_name }}Plus_v${{ env.TWEAK_VERSION }}_${{ env.YT_VERSION }}.ipa -uwef $tweaks -n "${{ github.event.inputs.display_name }}" -b ${{ github.event.inputs.bundle_id }}
 
       - name: Upload to GitHub Releases
